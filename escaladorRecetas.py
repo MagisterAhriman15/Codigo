@@ -13,8 +13,9 @@ class Ingrediente():
         
     def imprimir(self):
         return print(self.nombre_ingrediente, self.cantidad, self.unidad_medida, self.existencia)
-        
     
+    def modificarCantidad(self, varianza):
+        pass
         
 
 print("Bienvenido al escalador de recetas")
@@ -41,3 +42,11 @@ Paso 4: Cuele la pasta del agua, cuando enfrie, combinarlo con la salsa y ya est
 """
 
 print(instrucciones_cocina)
+
+"""
+Posibles cambios
+usar un archivo txt o un csv, para guardar los ingredientes, aca se deben añadir los instanciados cuando el programa se ejecuta y las
+modificaciones de cantidad.
+ver que hacer con instrucciones de cocina, no se si otra clase o que con un metodo haga las modificaciones de cantidad, añadir de otros
+platos.
+"""
