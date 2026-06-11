@@ -15,7 +15,11 @@ class Ingrediente():
         return print(self.nombre_ingrediente, self.cantidad, self.unidad_medida, self.existencia)
     
     def modificarCantidad(self, varianza):
-        pass
+        if varianza>=0:
+            self.cantidad=self.cantidad-varianza
+        else:
+            self.cantidad=self.cantidad
+            print("La cantidad añadida o reducida al ingrediente es negativa, vuelva a iniciar agregando o restando una cantidad positiva")
         
 
 print("Bienvenido al escalador de recetas")
