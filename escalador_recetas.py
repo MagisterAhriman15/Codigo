@@ -49,8 +49,9 @@ print(instrucciones_cocina)
 
 """
 Posibles cambios
-usar un archivo txt o un csv, para guardar los ingredientes, aca se deben añadir los instanciados cuando el programa se ejecuta y las
+-usar un archivo txt o un csv, para guardar los ingredientes, aca se deben añadir los instanciados cuando el programa se ejecuta y las
 modificaciones de cantidad.
-ver que hacer con instrucciones de cocina, no se si otra clase o que con un metodo haga las modificaciones de cantidad, añadir de otros
+-ver que hacer con instrucciones de cocina, no se si otra clase o que con un metodo haga las modificaciones de cantidad, añadir de otros
 platos.
+-Puedo usar un bucle while para generar un menú, junto a user input para las entradas de usuario
 """
