@@ -5,6 +5,7 @@ existencia es un bool, True es Si, False es No
 """
 
 import csv
+import os
 
 class Ingrediente():
     def __init__(self, nombre_ingrediente, cantidad, unidad_medida, existencia):
@@ -59,16 +60,19 @@ catalogo_ingredientes = [
     Ingrediente("carne", 2, "kg", True)
 ]
 
+def limpiar_consola():
+    # 'nt' corresponde a Windows
+    if os.name == 'nt':
+        os.system('cls')
+    # Para macOS y Linux (posix)
+    else:
+        os.system('clear')
+
 # Guardamos los datos
 guardar_ingredientes_csv(catalogo_ingredientes, 'inventario_ingredientes.csv')
 
 # Los leemos en una nueva lista
 ingredientes_recuperados = cargar_ingredientes_csv('inventario_ingredientes.csv')
-
-print("Bienvenido al escalador de recetas")
-
-for j in ingredientes_recuperados:
-    print(f"Recuperado: {j.nombre_ingrediente} - Quedan {j.cantidad} {j.unidad_medida}.")
 
 instrucciones_cocina = """
 Instrucciones de cocina
@@ -78,11 +82,38 @@ Paso 3: Prepare la salsa en una sarten, use 1 kg de carne, 1 cabeza de ajo y 2 b
 Paso 4: Cuele la pasta del agua, cuando enfrie, combinarlo con la salsa y ya estaria
 """
 
-print(instrucciones_cocina)
+flag=True
+
+while(flag):
+    limpiar_consola()
+    print("Bienvenido al escalador de recetas")
+    print("1. Ver inventario de ingredientes")
+    print("2. Añadir ingredientes al inventario")
+    print("3. Ver recetas")
+    print("4. Indicar que receta se va a preparar, para modificar el inventario")
+    print("0. Salir del programa")
+    opcion_str=input("¿Que opcion deseas ejecutar? ")
+    opcion=int(opcion_str)
+    if opcion==1:
+        for j in ingredientes_recuperados:
+            print(f"Recuperado: {j.nombre_ingrediente} - Quedan {j.cantidad} {j.unidad_medida}.") 
+        input("Presiona Enter para continuar...")
+    elif opcion==2:
+        pass
+        #Añadir ingrediente
+    elif opcion==3:
+        print(instrucciones_cocina)
+        input("Presiona Enter para continuar...")
+    elif opcion==4:
+        pass
+        #Indicar receta a preparar
+    elif opcion==0:
+        break
+    else:
+        break
 
 """
 Posibles cambios
 -ver que hacer con instrucciones de cocina, no se si otra clase o que con un metodo haga las modificaciones de cantidad, añadir de otros
-platos, se debe cambiar en los csv.
--Puedo usar un bucle while para generar un menú, junto a user input para las entradas de usuario
+platos, se debe cambiar en los csv y en menu while loop.
 """
