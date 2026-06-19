@@ -4,6 +4,8 @@ cantidad es un int
 existencia es un bool, True es Si, False es No
 """
 
+import csv
+
 class Ingrediente():
     def __init__(self, nombre_ingrediente, cantidad, unidad_medida, existencia):
         self.nombre_ingrediente:str=nombre_ingrediente
@@ -19,22 +21,54 @@ class Ingrediente():
     
     def disminuirCantidad(self, disminuir):
         pass
-        
+    
+
+def guardar_ingredientes_csv(lista_ingredientes, nombre_archivo):
+    with open(nombre_archivo, mode='w', newline='', encoding='utf-8') as archivo:
+        campos = ['nombre_ingrediente', 'cantidad', 'unidad_medida', 'existencia']
+        escritor = csv.DictWriter(archivo, fieldnames=campos)
+        escritor.writeheader() 
+        for ingrediente in lista_ingredientes:
+            # Escribimos cada objeto convirtiendo sus atributos a un diccionario
+            escritor.writerow({
+                'nombre_ingrediente': ingrediente.nombre_ingrediente,
+                'cantidad': ingrediente.cantidad,
+                'unidad_medida': ingrediente.unidad_medida,
+                'existencia': ingrediente.existencia,
+            })
+    
+def cargar_ingredientes_csv(nombre_archivo):
+    ingredientes_cargados = []
+    # 'r' es el modo de lectura (read).
+    with open(nombre_archivo, mode='r', encoding='utf-8') as archivo:
+        lector = csv.DictReader(archivo)        
+        for fila in lector:
+            nuevo_ingrediente = Ingrediente(
+                nombre_ingrediente=fila['nombre_ingrediente'], 
+                cantidad=int(fila['cantidad']), 
+                unidad_medida=fila['unidad_medida'],
+                existencia=bool(fila['existencia'])
+            )
+            ingredientes_cargados.append(nuevo_ingrediente)
+    return ingredientes_cargados
+    
+catalogo_ingredientes = [
+    Ingrediente("pasta", 20, "kg", True),
+    Ingrediente("dientes de ajo", 5, "cabezas", True),
+    Ingrediente("aceite de oliva", 5, "bolsas", True),
+    Ingrediente("carne", 2, "kg", True)
+]
+
+# Guardamos los datos
+guardar_ingredientes_csv(catalogo_ingredientes, 'inventario_ingredientes.csv')
+
+# Los leemos en una nueva lista
+ingredientes_recuperados = cargar_ingredientes_csv('inventario_ingredientes.csv')
 
 print("Bienvenido al escalador de recetas")
-ingredientes={"pasta":20, "dientes de ajo":5, "aceite de oliva":5, "carne":2}
-ingredientes_nombre=ingredientes.keys()
-ingredientes_cantidad=ingredientes.values()
-ingredientes_pares=ingredientes.items()
-ingrediente1=Ingrediente("pasta", 20, "kg", True)
-ingrediente2=Ingrediente("dientes de ajo", 5, "cabezas", True)
-ingrediente3=Ingrediente("aceite de oliva", 5, "bolsas", True)
-ingrediente4=Ingrediente("carne", 2, "kg", True)
-ingrediente1.imprimir()
-ingrediente2.imprimir()
-ingrediente3.imprimir()
-ingrediente4.imprimir()
 
+for j in ingredientes_recuperados:
+    print(f"Recuperado: {j.nombre_ingrediente} - Quedan {j.cantidad} {j.unidad_medida}.")
 
 instrucciones_cocina = """
 Instrucciones de cocina
@@ -48,9 +82,7 @@ print(instrucciones_cocina)
 
 """
 Posibles cambios
--usar un archivo txt o un csv, para guardar los ingredientes, aca se deben añadir los instanciados cuando el programa se ejecuta y las
-modificaciones de cantidad.
 -ver que hacer con instrucciones de cocina, no se si otra clase o que con un metodo haga las modificaciones de cantidad, añadir de otros
-platos.
+platos, se debe cambiar en los csv.
 -Puedo usar un bucle while para generar un menú, junto a user input para las entradas de usuario
 """
