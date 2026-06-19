@@ -30,7 +30,6 @@ def guardar_ingredientes_csv(lista_ingredientes, nombre_archivo):
         escritor = csv.DictWriter(archivo, fieldnames=campos)
         escritor.writeheader() 
         for ingrediente in lista_ingredientes:
-            # Escribimos cada objeto convirtiendo sus atributos a un diccionario
             escritor.writerow({
                 'nombre_ingrediente': ingrediente.nombre_ingrediente,
                 'cantidad': ingrediente.cantidad,
@@ -40,7 +39,6 @@ def guardar_ingredientes_csv(lista_ingredientes, nombre_archivo):
     
 def cargar_ingredientes_csv(nombre_archivo):
     ingredientes_cargados = []
-    # 'r' es el modo de lectura (read).
     with open(nombre_archivo, mode='r', encoding='utf-8') as archivo:
         lector = csv.DictReader(archivo)        
         for fila in lector:
@@ -93,7 +91,14 @@ while(flag):
     print("4. Indicar que receta se va a preparar, para modificar el inventario")
     print("0. Salir del programa")
     opcion_str=input("¿Que opcion deseas ejecutar? ")
-    opcion=int(opcion_str)
+    
+    try:
+        opcion=int(opcion_str)
+    except ValueError:
+        print("¡Error! Has introducido letras o caracteres inválidos. Debes escribir un número entero.")
+        input("Presiona Enter para volver a intentarlo...")
+        continue
+    
     if opcion==1:
         for j in ingredientes_recuperados:
             print(f"Recuperado: {j.nombre_ingrediente} - Quedan {j.cantidad} {j.unidad_medida}.") 
