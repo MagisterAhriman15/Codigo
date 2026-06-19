@@ -66,11 +66,12 @@ def limpiar_consola():
     else:
         os.system('clear')
 
-# Guardamos los datos
-guardar_ingredientes_csv(catalogo_ingredientes, 'inventario_ingredientes.csv')
+carpeta_destino = "csv"
+os.makedirs(carpeta_destino, exist_ok=True)
+ruta_csv = os.path.join(carpeta_destino, 'inventario_ingredientes.csv')
 
-# Los leemos en una nueva lista
-ingredientes_recuperados = cargar_ingredientes_csv('inventario_ingredientes.csv')
+guardar_ingredientes_csv(catalogo_ingredientes, ruta_csv)
+ingredientes_recuperados = cargar_ingredientes_csv(ruta_csv)
 
 instrucciones_cocina = """
 Instrucciones de cocina
@@ -121,4 +122,5 @@ while(flag):
 Posibles cambios
 -ver que hacer con instrucciones de cocina, no se si otra clase o que con un metodo haga las modificaciones de cantidad, añadir de otros
 platos, se debe cambiar en los csv y en menu while loop.
+-modificar la lectura del csv, porque luego los proyectos chicos tendran su propia carpeta y los csv tendran su otra carpeta, para que interactuen
 """
