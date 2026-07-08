@@ -117,10 +117,3 @@ while(flag):
         break
     else:
         break
-
-"""
-Posibles cambios
--ver que hacer con instrucciones de cocina, no se si otra clase o que con un metodo haga las modificaciones de cantidad, añadir de otros
-platos, se debe cambiar en los csv y en menu while loop.
--modificar la lectura del csv, porque luego los proyectos chicos tendran su propia carpeta y los csv tendran su otra carpeta, para que interactuen
-"""
