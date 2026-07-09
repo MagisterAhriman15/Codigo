@@ -96,7 +96,7 @@ while(flag):
     try:
         opcion=int(opcion_str)
     except ValueError:
-        print("¡Error! Has introducido letras o caracteres inválidos. Debes escribir un número entero.")
+        print("¡Error! Has introducido letras o caracteres no numericos. Debes escribir un número entero.")
         input("Presiona Enter para volver a intentarlo...")
         continue
     
@@ -115,5 +115,11 @@ while(flag):
         #Indicar receta a preparar
     elif opcion==0:
         break
+    elif opcion<0:
+        print("¡Error! Has ingresado un número negativo para las opciones, introducir un valor positivo entre 1 a 4")
+        input("Presiona Enter para volver a intentarlo...")
+        continue
     else:
-        break
+        print("¡Error! Has introducido una opción que no existente, introducir un valor para opción entre 1 a 4.")
+        input("Presiona Enter para volver a intentarlo...")
+        continue
